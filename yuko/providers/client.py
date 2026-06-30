@@ -159,7 +159,12 @@ class OpenAICompatibleModelClient:
                         "retry_count": retry_count,
                     }
                     text = _extract_text_from_openai(data)
-                    return ModelResult(text=text, metadata=dict(self.last_metadata))
+                    tool_calls = _extract_tool_calls_from_openai(data)
+                    return ModelResult(
+                        text=text,
+                        tool_calls=tool_calls,
+                        metadata=dict(self.last_metadata),
+                    )
 
                 # HTTP 错误
                 retryable = response.status_code in RETRYABLE_HTTP_STATUS
@@ -281,7 +286,12 @@ class AnthropicCompatibleModelClient:
                         "retry_count": retry_count,
                     }
                     text = _extract_text_from_anthropic(data)
-                    return ModelResult(text=text, metadata=dict(self.last_metadata))
+                    tool_calls = _extract_tool_use_from_anthropic(data)
+                    return ModelResult(
+                        text=text,
+                        tool_calls=tool_calls,
+                        metadata=dict(self.last_metadata),
+                    )
 
                 retryable = response.status_code in RETRYABLE_HTTP_STATUS
                 if retryable and attempt < 2:

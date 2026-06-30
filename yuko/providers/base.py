@@ -7,6 +7,7 @@ from dataclasses import dataclass, field
 class ModelResult:
     """模型返回结果。"""
     text: str
+    tool_calls: list[dict] = field(default_factory=list)
     metadata: dict = field(default_factory=dict)
 
 
