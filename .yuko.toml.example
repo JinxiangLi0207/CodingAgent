@@ -1,0 +1,22 @@
+# yuko 项目配置文件示例
+# 将此文件复制为 .yuko.toml 并填入真实值
+
+provider = "openai"  # openai / anthropic / deepseek
+
+[providers.openai]
+protocol = "openai"
+api_key = "sk-your-key-here"
+base_url = "https://api.openai.com/v1"
+model = "gpt-4o"
+
+[providers.anthropic]
+protocol = "anthropic"
+api_key = "sk-ant-your-key-here"
+base_url = "https://api.anthropic.com"
+model = "claude-sonnet-4-6"
+
+[providers.deepseek]
+protocol = "anthropic"
+api_key = "sk-your-deepseek-key"
+base_url = "https://api.deepseek.com/anthropic"
+model = "deepseek-v4-pro"
